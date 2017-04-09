@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<!-- **************************************DataSource************************************************ 
+		<bean id="ARSVCDataSource" class="info.sheen.nettyRrest.dao.DBConnectionPool"> 
+		<property name="driverClassName" value="COM.ibm.db2.jdbc.app.DB2Driver" /> 
+		<property name="url" value="jdbc:db2://172.17.252.76:61611/ARSVCDB"></property> 
+		<property name="dbname" value="ARSVCDB" /> <property name="user" value="ar_svcap" 
+		/> <property name="password" value="Ares_2016"></property> <property name="maxConn" 
+		value="20" /> <property name="initConn" value="10" /> </bean> -->
+	<bean id="resteasyPlatServer" class="info.sheen.nettyRrest.server.ResteasyPlatServer">
+		<property name="address" value="172.16.204.44,192.168.0.100"></property>
+		<property name="serverPort" value="80" />
+		<property name="ioWorkCount" value="2" />
+		<property name="maxRequestSize" value="10" />
+		<property name="executorThreadCount" value="40" />
+	</bean>
+
+	<bean id="exceptionHandler" class="info.sheen.nettyRrest.handler.RestExceptionHandler"
+		scope="prototype">
+	</bean>
+
+	<bean id="userInfoInterceptor" class="info.sheen.nettyRrest.interceptor.UserInfoInterceptor"
+		scope="prototype">
+	</bean>
+
+	<bean id="userService" class="info.sheen.nettyRrest.service.UserService"
+		scope="prototype">
+	</bean>
+
+	<bean id="wechatService" class="info.sheen.nettyRrest.service.WechatTestService"
+		scope="prototype">
+	</bean>
+
+
+</beans>
